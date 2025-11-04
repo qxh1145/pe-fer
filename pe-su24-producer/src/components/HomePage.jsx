@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 const HomePage = () => {
   const {
     state: { filtered: movies },
-    setProducerFilter, // Use filtered projects from context
+    setGenreFilter,
+    setProducerFilter // Use filtered projects from context
   } = useMovie();
   const {
     state: { producers },
@@ -30,9 +31,19 @@ const HomePage = () => {
   const uniqueProducer = [...new Set(allProducer)];
 
   const handleChangeProducerFilter = (e) => {
-    const selectedP= e;
-    setProducerFilter(selectedP); // Use context function to set filter
+    const selectedP = e;
+    setGenreFilter(selectedP); // Use context function to set filter
   };
+
+  const handleChangePFilter = (e) => {
+    const selectedPro = e
+    const pID = producers.find((p) => p.name == selectedPro)?.id
+
+    setProducerFilter(pID)
+    console.log(pID)
+  }
+
+
 
   return (
     <Container>
@@ -48,13 +59,13 @@ const HomePage = () => {
             padding: "3vh",
           }}
         >
-        {/* //   <p href="/" value={"Comedy"} onClick={(e) =>handleChangeProducerFilter(e.target.value)}>Comendy</p>
+          {/* //   <p href="/" value={"Comedy"} onClick={(e) =>handleChangeProducerFilter(e.target.value)}>Comendy</p>
         //   <p href="/" value={"Action"} onClick={(e) =>handleChangeProducerFilter(e.target.value)}>Action</p>
         //   <p href="/" value={"Cartoon"} onClick={(e) =>handleChangeProducerFilter(e.target.value)}>Cartoon</p> */}
-          <p  onClick={() =>handleChangeProducerFilter("Comedy")}>Comedy</p>
-          <p  onClick={() =>handleChangeProducerFilter("Action")}>Action</p>
-          <p  onClick={() =>handleChangeProducerFilter("Cartoon")}>Cartoon</p>
-          <p  onClick={() =>handleChangeProducerFilter("Drama")}>Drama</p>
+          <p onClick={() => handleChangeProducerFilter("Comedy")}>Comedy</p>
+          <p onClick={() => handleChangeProducerFilter("Action")}>Action</p>
+          <p onClick={() => handleChangeProducerFilter("Cartoon")}>Cartoon</p>
+          <p onClick={() => handleChangeProducerFilter("Drama")}>Drama</p>
         </div>
       </Row>
 
@@ -62,10 +73,10 @@ const HomePage = () => {
         <Col md={3}>
           <h5>Producers</h5>
           <ul>
-            {uniqueProducer.map((m) => (
+            {uniqueProducer.map((m, index) => (
               <li>
                 {/* <a href="">{producers.find((p) => m == p.id)?.name}</a> */}
-                <p>{m}</p>
+                <p onClick={() => handleChangePFilter(m)}>{m}</p>
               </li>
             ))}
           </ul>
@@ -98,10 +109,10 @@ const HomePage = () => {
                     {m.stars
                       .map((starId, index) => {
                         const star = stars.find((s) => s.id == starId);
-                        return <div>{ star ? (index+1) + "-"+ star.fullname : "Không rõ"} </div>
+                        return <div>{star ? (index + 1) + "-" + star.fullname : "Không rõ"} </div>
                       })
-                      }
-                      <Link to={`/movies/${m.id}/add-star`}>Add star</Link>
+                    }
+                    <Link to={`/movies/${m.id}/add-star`}>Add star</Link>
                   </td>
                 </tr>
               ))}

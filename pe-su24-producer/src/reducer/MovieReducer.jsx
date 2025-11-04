@@ -39,6 +39,16 @@ export const MovieReducer = (state, action) => {
         selectedGenre: genre,
         filtered: newFilteredGenre,
       };
+      case "SET_FILTER_PRODUCER":
+      const producer = action.payload;
+      const newFilterProducer = producer
+        ? state.movies.filter((movie) => movie.producer == producer)
+        : state.movies;
+      return {
+        ...state,
+        selectedProducer: producer,
+        filtered: newFilterProducer,
+      };
     case "UPDATE_MOVIE_STARS": {
       const { movieId, stars } = action.payload;
       const updateMovie = (movies) =>

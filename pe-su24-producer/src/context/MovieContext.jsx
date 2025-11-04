@@ -29,16 +29,20 @@ export const MovieProvider = ({ children }) => {
     return () => controller.abort();
   }, []);
 
-      const setProducerFilter = (producer) => {
-        dispatch({ type: "SET_FILTER", payload: producer });
+      const setGenreFilter = (genre) => {
+        dispatch({ type: "SET_FILTER", payload: genre });
     };
 
     const updateMovieStars = (movieId, stars) => {
         dispatch({ type: "UPDATE_MOVIE_STARS", payload: { movieId, stars }})
     }
 
+    const setProducerFilter = (producer) =>{
+        dispatch({type: "SET_FILTER_PRODUCER", payload: producer})
+    }
+
   return (
-    <MovieContext.Provider value={{ state, dispatch, setProducerFilter , updateMovieStars}}>
+    <MovieContext.Provider value={{ state, dispatch, setGenreFilter , updateMovieStars, setProducerFilter}}>
       {children}
     </MovieContext.Provider>
   );
