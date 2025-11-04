@@ -5,37 +5,41 @@ import { initialState } from "../reducer/GradeReducer";
 export const GradeContext = createContext(null);
 
 export const GradeProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(GradeReducer, initialState);
+  const [state, dispatch] = useReducer(GradeReducer, initialState);
 
-    useEffect(() => {
-        const controller = new AbortController();
+  useEffect(() => {
+    const controller = new AbortController();
 
-        const getGrade = async () => {
-            dispatch({ type: "FETCH_START" });
-            try {
-                const res = await axiosInstance.get("/evaluations", {
-                    signal: controller.signal,
-                });
-                dispatch({ type: "FETCH_SUCCESS", payload: res.data });
-            } catch (error) {
-                if (error.name !== "CanceledError" && error.name !== "AbortError") {
-                    dispatch({ type: "FETCH_ERROR", payload: error.message });
-                    console.error("Fetch projects failed:", error);
-                }
-            }
-        };
-        getGrade();
+    const getGrade = async () => {
+      dispatch({ type: "FETCH_START" });
+      try {
+        const res = await axiosInstance.get("/evaluations", {
+          signal: controller.signal,
+        });
+        dispatch({ type: "FETCH_SUCCESS", payload: res.data });
+      } catch (error) {
+        if (error.name !== "CanceledError" && error.name !== "AbortError") {
+          dispatch({ type: "FETCH_ERROR", payload: error.message });
+          console.error("Fetch projects failed:", error);
+        }
+      }
+    };
+    getGrade();
 
-        return () => controller.abort();
-    }, []);
+    return () => controller.abort();
+  }, []);
 
+  const addGrade = (grade) => {
+    dispatch({ type: "ADD_GRADE", payload: grade });
+  };
+  const clearForm = () => {
+    dispatch({ type: "CLEAR_FORM"});
+  };
 
-
-
-    return (
-        <GradeContext.Provider value={{ state, dispatch }}>
-            {children}
-        </GradeContext.Provider>
-    );
+  return (
+    <GradeContext.Provider value={{ state, dispatch, addGrade ,clearForm}}>
+      {children}
+    </GradeContext.Provider>
+  );
 };
 export const useGrade = () => useContext(GradeContext);
