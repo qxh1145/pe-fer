@@ -9,16 +9,19 @@ import Cart from './conponents/Cart';
 import MotobikeDetail from './conponents/MotobikeDetail';
 function App() {
   return (
+    <MotobikesProvider>
     <CartProvider>
       <BrowserRouter>
         <Routes>
         <Route path='/' element={<LoginForm username="" password="" />} />
-          <Route path='/motobikes' element={<MotobikesProvider><Motobikes /></MotobikesProvider>} />
+          <Route path='/motobikes' element={<Motobikes />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/view/:id' element={<MotobikesProvider><MotobikeDetail /></MotobikesProvider>} />
         </Routes>
       </BrowserRouter>
+      
     </CartProvider>
+    </MotobikesProvider>
   );
 }
 

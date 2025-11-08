@@ -1,0 +1,32 @@
+{
+  "habits": [
+    {
+      "id": 1,
+      "title": "Read a book",
+      "day": "Monday",
+      "goal": "Read 20 pages",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Go for a run",
+      "day": "Wednesday",
+      "goal": "Run 3km",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "title": "Learn React",
+      "day": "Friday",
+      "goal": "Complete one chapter",
+      "completed": false
+    },
+    {
+      "id": "b7d7",
+      "title": "dadasda",
+      "day": "Monday",
+      "goal": "asdasdasdas",
+      "completed": false
+    }
+  ]
+}

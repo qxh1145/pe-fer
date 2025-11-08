@@ -22,6 +22,8 @@ export const CartProvider = ({ children }) => {
         (sum, it) => sum + it.priceNum * it.quantity, 0
     );
 
+    
+
     const addToCart = (product) => dispatch({ type: "ADD_TO_CART", payload: product });
     const updateQuantity = (id, quantity) => dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
     const removeItem = (id) => dispatch({ type: "REMOVE_ITEM", payload: { id } });
@@ -34,4 +36,4 @@ export const CartProvider = ({ children }) => {
     );
 };
 
-export const useCart = () => {useContext(CartContext);};
+export const useCart = () => useContext(CartContext);

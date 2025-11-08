@@ -31,6 +31,18 @@ export const MotobikesReducer = (state, action) => {
             };
         }
 
+        case 'INCREASE_STOCK': {
+            const { id, quantity } = action.payload;
+            const adjust = (list) => list.map((m) =>
+                m.id === id ? { ...m, stock: (m.stock ?? 0) + quantity } : m
+            );
+            return {
+                ...state,
+                motobikes: adjust(state.motobikes),
+                filtered: adjust(state.filtered)
+            };
+        }
+
         case 'SORT_MOTOBIKE_ASC':
             return {
                 ...state, filtered: [...state.filtered].sort((a, b) => {

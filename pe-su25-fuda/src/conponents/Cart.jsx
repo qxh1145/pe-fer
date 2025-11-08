@@ -1,8 +1,15 @@
 import { Table, Button, Form } from "react-bootstrap";
 import { useCart } from "../context/CartContext";
+import { useMotobikes } from "../context/MotobikeContext";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { state: { items }, total, updateQuantity, removeItem, clearCart } = useCart();
+  const {
+    increaseStock,
+  } = useMotobikes();
+  const navigate = useNavigate();
+
 
   if (items.length === 0) {
     return (
@@ -12,6 +19,28 @@ const Cart = () => {
       </div>
     );
   }
+
+  const handleCheckout = () => {
+    alert("Thanh toán thành công");
+    clearCart()
+    navigate("/motobikes");
+  }
+
+  const handleClearCart = () => {
+    items.forEach(item => {
+      increaseStock(item.id, item.quantity);
+    });
+    clearCart();
+  }
+
+  const handleRemoveItem = (item) => {
+    if (item) {
+      increaseStock(item.id, item.quantity);
+      removeItem(item.id);
+    }
+  };
+
+
 
   return (
     <div className="container my-4">
@@ -42,7 +71,7 @@ const Cart = () => {
               </td>
               <td>{`$${(it.priceNum * it.quantity).toFixed(2)}`}</td>
               <td>
-                <Button variant="danger" size="sm" onClick={() => removeItem(it.id)}>
+                <Button variant="danger" size="sm" onClick={() => handleRemoveItem(it)}>
                   Remove
                 </Button>
               </td>
@@ -53,8 +82,8 @@ const Cart = () => {
 
       <div className="d-flex justify-content-end align-items-center gap-3">
         <h5 className="mb-0">Total: ${total.toFixed(2)}</h5>
-        <Button variant="success">Checkout</Button>
-        <Button variant="outline-secondary" onClick={clearCart}>Clear</Button>
+        <Button variant="success" onClick={handleCheckout}>Checkout</Button>
+        <Button variant="outline-secondary" onClick={handleClearCart}>Clear</Button>
       </div>
     </div>
   );

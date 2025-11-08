@@ -44,6 +44,10 @@ export const MotobikesProvider = ({ children }) => {
         dispatch({ type: "QUERY_MOTOBIKE", payload: text });
     };
 
-    return <MotobikesContext.Provider value={{ state, dispatch, getAllMotbikes, searchMotobike }}>{children}</MotobikesContext.Provider>
+    const increaseStock = (id, quantity) => {
+        dispatch({ type: "INCREASE_STOCK", payload: { id, quantity } });
+    };
+
+    return <MotobikesContext.Provider value={{ state, dispatch, getAllMotbikes, searchMotobike, increaseStock }}>{children}</MotobikesContext.Provider>
 }
 export const useMotobikes = () => useContext(MotobikesContext) 
