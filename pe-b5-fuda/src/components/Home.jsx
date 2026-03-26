@@ -6,23 +6,26 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Dropdown from "react-bootstrap/Dropdown";
-import { useExpenses } from "../context/ExpensesContext";
-import Header from "./Header";
-import Content from "./Content";
+
+import { usePhone } from "../context/PhoneContext";
+import NavBarComponent from "./NavBarComponent";
+import ProductPage from "./ProductPage";
 const Home = () => {
   const {
-    state: { filtered: expenses },
-    removeExpenses,
-    updateExpenses,
-    addToList
-  } = useExpenses();
-
+    state: { filtered: mobiles },
+    search,
+  } = usePhone();
 
   return (
     <Container>
-        <Row><Header/></Row>
-        <Row><Content/></Row>
+      <Row>
+        <NavBarComponent/>
+      </Row>
+      <Row>
+        <ProductPage/>
+      </Row>
+      <Row></Row>
     </Container>
-  )
+  );
 };
 export default Home;

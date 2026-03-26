@@ -14,7 +14,7 @@ function LoginForm() {
         setError('');
 
         try {
-            const response = await axiosInstance.get('/users', {
+            const response = await axiosInstance.get('/accounts', {
                 params: {
                     username: username,
                     password: password
@@ -38,7 +38,7 @@ function LoginForm() {
         <Container>
             <Row className='mt-5 border p-5'>
                 <Col md={{ span: 6, offset: 3 }}>
-                    <h2 className="text-center">Đăng nhập</h2>
+                    <h2 className="text-center">Welcome Back</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
@@ -53,6 +53,7 @@ function LoginForm() {
 
                         <Button variant="primary" type="submit">Đăng nhập</Button>
                     </Form>
+                    <p className="mt-3">Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link></p>
                 </Col>
             </Row>
         </Container>

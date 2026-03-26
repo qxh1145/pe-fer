@@ -6,22 +6,21 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import Dropdown from "react-bootstrap/Dropdown";
-import { useExpenses } from "../context/ExpensesContext";
 import Header from "./Header";
-import Content from "./Content";
+import FilterBar from "./FilterBar";
+import PaymentList from "./PaymentsList";
 const Home = () => {
-  const {
-    state: { filtered: expenses },
-    removeExpenses,
-    updateExpenses,
-    addToList
-  } = useExpenses();
+  // const {
+  //   state: { filtered: something },
+  //   searchCar,
+  // } = useCar();
 
 
   return (
     <Container>
-        <Row><Header/></Row>
-        <Row><Content/></Row>
+        <Row><Header></Header></Row>
+        <Row><FilterBar/></Row>
+        <Row><PaymentList/></Row>
     </Container>
   )
 };

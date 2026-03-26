@@ -53,6 +53,7 @@ function LoginForm() {
 
                         <Button variant="primary" type="submit">Đăng nhập</Button>
                     </Form>
+                    <p className="mt-3">Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link></p>
                 </Col>
             </Row>
         </Container>
